@@ -279,6 +279,34 @@ function setupModal() {
     };
 }
 
+function setupTasksMenu() {
+    // Re-use the modal showing logic
+    const modal = document.getElementById('download-modal');
+    const urlInput = document.getElementById('url-input');
+
+    document.getElementById('menu-add-new').onclick = () => {
+        modal.style.display = 'flex';
+        urlInput.value = '';
+        urlInput.focus();
+        // Hide dropdown on click by briefly removing hover effect (hackish but simple for CSS only dropdowns)
+        const parent = document.querySelector('.dropdown-parent');
+        parent.style.pointerEvents = 'none';
+        setTimeout(() => parent.style.pointerEvents = 'auto', 100);
+    };
+
+    document.getElementById('menu-add-batch').onclick = () => showToast("Add batch download: Coming soon", "info");
+    document.getElementById('menu-add-clipboard').onclick = () => showToast("Add batch download from clipboard: Coming soon", "info");
+    document.getElementById('menu-run-grabber').onclick = () => showToast("Run site grabber: Coming soon", "info");
+    document.getElementById('menu-show-drop-target').onclick = () => showToast("Show drop target enabled", "success");
+    document.getElementById('menu-exit').onclick = () => {
+        const confirmExit = confirm("Are you sure you want to exit Download Manager?");
+        if (confirmExit) {
+            showToast("Exiting application...", "info");
+            // Placeholder: Typically this would send a close signal to electron or the backend
+        }
+    };
+}
+
 function showToast(message, type = "error") {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
@@ -295,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSidebar();
     setupModal();
     setupToolbar();
+    setupTasksMenu();
 });
 
 const styleEl = document.createElement('style');
