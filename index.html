@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Download Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium look -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons for toolbar -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- FontAwesome for tree icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Top Menu Bar -->
+        <nav class="top-nav">
+            <ul>
+                <li>Tasks</li>
+                <li>File</li>
+                <li>Downloads</li>
+                <li>View</li>
+                <li>Help</li>
+                <li>Registration</li>
+            </ul>
+        </nav>
+
+        <!-- Icon Toolbar -->
+        <header class="toolbar">
+            <div class="toolbar-item" id="add-url">
+                <i data-lucide="plus-circle" class="icon-primary"></i>
+                <span>Add URL</span>
+            </div>
+            <div class="toolbar-item" id="resume-btn">
+                <i data-lucide="play-circle" class="icon-success"></i>
+                <span>Resume</span>
+            </div>
+            <div class="toolbar-item" id="stop-btn">
+                <i data-lucide="pause-circle" class="icon-warning"></i>
+                <span>Stop</span>
+            </div>
+            <div class="toolbar-item" id="stop-all-btn">
+                <i data-lucide="stop-circle" class="icon-danger"></i>
+                <span>Stop All</span>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-item" id="delete-btn">
+                <i data-lucide="trash-2" class="icon-danger"></i>
+                <span>Delete</span>
+            </div>
+            <div class="toolbar-item">
+                <i data-lucide="settings"></i>
+                <span>Options</span>
+            </div>
+            <div class="toolbar-item">
+                <i data-lucide="calendar"></i>
+                <span>Scheduler</span>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-item">
+                <i data-lucide="share-2"></i>
+                <span>Tell a Friend</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-header">Categories</div>
+                <div class="tree-view">
+                    <!-- All Downloads -->
+                    <div class="tree-node">
+                        <div class="tree-item active" data-filter="all">
+                            <i class="toggle-icon fas fa-minus-square"></i>
+                            <i data-lucide="folder" class="folder-icon"></i>
+                            <span>All Downloads</span>
+                        </div>
+                        <div class="tree-sub-items">
+                            <div class="tree-item" data-filter="Compressed"><i data-lucide="file-archive"></i>
+                                Compressed</div>
+                            <div class="tree-item" data-filter="Documents"><i data-lucide="file-text"></i> Documents
+                            </div>
+                            <div class="tree-item" data-filter="Music"><i data-lucide="music"></i> Music</div>
+                            <div class="tree-item" data-filter="Programs"><i data-lucide="box"></i> Programs</div>
+                            <div class="tree-item" data-filter="Video"><i data-lucide="file-video"></i> Video</div>
+                        </div>
+                    </div>
+
+                    <!-- Unfinished -->
+                    <div class="tree-node">
+                        <div class="tree-item" data-filter="unfinished">
+                            <i class="toggle-icon fas fa-minus-square"></i>
+                            <i data-lucide="folder-clock" class="folder-icon"></i>
+                            <span>Unfinished</span>
+                        </div>
+                        <div class="tree-sub-items">
+                            <div class="tree-item" data-filter="unfinished-Compressed"><i
+                                    data-lucide="file-archive"></i> Compressed</div>
+                            <div class="tree-item" data-filter="unfinished-Documents"><i data-lucide="file-text"></i>
+                                Documents</div>
+                            <div class="tree-item" data-filter="unfinished-Music"><i data-lucide="music"></i> Music
+                            </div>
+                            <div class="tree-item" data-filter="unfinished-Programs"><i data-lucide="box"></i> Programs
+                            </div>
+                            <div class="tree-item" data-filter="unfinished-Video"><i data-lucide="file-video"></i> Video
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finished -->
+                    <div class="tree-node expanded">
+                        <div class="tree-item" data-filter="finished">
+                            <i class="toggle-icon fas fa-minus-square"></i>
+                            <i data-lucide="folder-check" class="folder-icon"></i>
+                            <span>Finished</span>
+                        </div>
+                        <div class="tree-sub-items">
+                            <div class="tree-item" data-filter="finished-Compressed"><i data-lucide="file-archive"></i>
+                                Compressed</div>
+                            <div class="tree-item" data-filter="finished-Documents"><i data-lucide="file-text"></i>
+                                Documents</div>
+                            <div class="tree-item" data-filter="finished-Music"><i data-lucide="music"></i> Music</div>
+                            <div class="tree-item" data-filter="finished-Programs"><i data-lucide="box"></i> Programs
+                            </div>
+                            <div class="tree-item" data-filter="finished-Video"><i data-lucide="file-video"></i> Video
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grabber projects -->
+                    <div class="tree-item" data-filter="grabber">
+                        <i class="toggle-icon no-child"></i>
+                        <i data-lucide="globe" class="folder-icon"></i>
+                        <span>Grabber projects</span>
+                    </div>
+
+                    <!-- Queues -->
+                    <div class="tree-node expanded">
+                        <div class="tree-item" data-filter="queues">
+                            <i class="toggle-icon fas fa-minus-square"></i>
+                            <i data-lucide="layers" class="folder-icon"></i>
+                            <span>Queues</span>
+                        </div>
+                        <div class="tree-sub-items">
+                            <div class="tree-item" data-filter="queue-main"><i data-lucide="folder-heart"></i> Main
+                                download queue</div>
+                            <div class="tree-item" data-filter="queue-sync"><i data-lucide="refresh-cw"></i>
+                                Synchronization queue</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Table Section -->
+            <section class="table-container">
+                <table id="download-table">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                            <th>Time Left</th>
+                            <th>Transfer Rate</th>
+                            <th>Date Added</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data will be populated by script.js -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- Status Bar -->
+        <footer class="status-bar">
+            <span>Ready</span>
+            <div class="stats">
+                <span>Items: 42</span>
+                <span>Active: 2</span>
+            </div>
+        </footer>
+    </div>
+    <!-- Add URL Modal -->
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <img src="https://www.internetdownloadmanager.com/favicon.ico" alt="IDM" class="modal-logo">
+                    <span>Enter new address to download</span>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="url-input">Address</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="url-input" placeholder="http://">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="auth-section">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="use-auth">
+                        <span class="checkmark"></span>
+                        Use authorization
+                    </label>
+                    <div class="auth-fields">
+                        <div class="auth-input">
+                            <label>Login</label>
+                            <input type="text" id="login-input" disabled>
+                        </div>
+                        <div class="auth-input">
+                            <label>Password</label>
+                            <input type="password" id="password-input" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-ok" class="btn-primary">OK</button>
+                <button id="modal-cancel" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
